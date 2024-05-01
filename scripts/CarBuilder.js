@@ -1,21 +1,18 @@
-import { addCustomOrder } from "./database.js"
-import { Interiors } from "./Interiors.js"
-import { Orders } from "./Orders.js"
-import { Paints } from "./Paints.js"
-import { Technologies } from "./Technologies.js"
-import { Wheels } from "./Wheels.js"
+import { addCustomOrder } from "./database.js";
+import { Interiors } from "./Interiors.js";
+import { Orders } from "./Orders.js";
+import { Paints } from "./Paints.js";
+import { Technologies } from "./Technologies.js";
+import { Wheels } from "./Wheels.js";
 
-document.addEventListener(
-    "click",
-    (event) => {
-        if (event.target.id === "orderButton") {
-            addCustomOrder()
-        }
-    }
-)
+document.addEventListener("click", (event) => {
+  if (event.target.id === "orderButton") {
+    addCustomOrder();
+  }
+});
 
-export const CarBuilder = () => {
-    return `
+export const CarBuilder = async () => {
+  return `
         <h1>Cars 'R Us: Personal Car Builder</h1>
 
         <article class="choices">
@@ -39,7 +36,7 @@ export const CarBuilder = () => {
 
         <article class="customOrders">
             <h2>Custom Car Orders</h2>
-            ${Orders()}
+            ${await Orders()}
         </article>
-    `
-}
+    `;
+};
