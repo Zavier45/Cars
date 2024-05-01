@@ -59,12 +59,15 @@ export const setTechnology = (id) => {
   // document.dispatchEvent(new CustomEvent("stateChanged"))
 };
 
-export const addCustomOrder = () => {
+export const addCustomOrder = async () => {
   const newOrder = { ...database.orderBuilder };
-  newOrder.timestamp = new Date().toLocaleDateString("en-US");
-  newOrder.id = database.customOrders[database.customOrders.length - 1].id + 1;
-  database.customOrders.push(newOrder);
-
+  await fetch(`https://localhost:7259/orders`, {
+    method: "POST",
+    headers: {
+      "Content-type": "application/json",
+    },
+    body: JSON.stringify(newOrder),
+  });
   database.orderBuilder = {};
   document.dispatchEvent(new CustomEvent("stateChanged"));
 };
