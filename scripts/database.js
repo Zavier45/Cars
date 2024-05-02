@@ -101,3 +101,10 @@ export const getPaints = async () => {
   const data = await res.json();
   return data;
 };
+
+export const completeOrder = async (orderId) => {
+  await fetch(`https://localhost:7259/orders/${orderId}/fulfill`, {
+    method: "PUT",
+  });
+  document.dispatchEvent(new CustomEvent("stateChanged"));
+};
