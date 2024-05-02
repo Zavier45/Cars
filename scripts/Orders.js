@@ -4,6 +4,7 @@ import {
   getTechnologies,
   getPaints,
   getOrders,
+  completeOrder,
 } from "./database.js";
 
 const paints = await getPaints();
@@ -26,7 +27,17 @@ export const Orders = async () => {
                   style: "currency",
                   currency: "USD",
                 })}
+                <input type="button" name="complete" id="${
+                  order.id
+                }" value="Complete"/>
             </section>`;
     })
     .join("")}`;
 };
+
+document.addEventListener("click", (event) => {
+  const { name, id } = event.target;
+  if (name === "complete") {
+    completeOrder(id);
+  }
+});
